@@ -372,6 +372,129 @@
     .config-note a { color: var(--accent2); text-decoration: none; }
 
     /* Settings icon button */
+
+    /* ── Dictionnaire ── */
+    #dict-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    #dict-overlay.open { transform: translateY(0); }
+
+    #dict-header {
+      padding: calc(var(--safe-top) + 14px) 16px 14px;
+      background: var(--bg);
+      border-bottom: 0.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    #dict-title {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-weight: 300;
+      flex: 1;
+      color: var(--text);
+    }
+
+    #dict-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text2);
+      font-size: 22px;
+      line-height: 1;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+    }
+
+    #dict-search-bar {
+      padding: 10px 14px;
+      background: var(--bg);
+      border-bottom: 0.5px solid var(--border);
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    #dict-input {
+      flex: 1;
+      background: var(--bg3);
+      border: 0.5px solid var(--border);
+      border-radius: 22px;
+      padding: 10px 16px;
+      font-size: 15px;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      outline: none;
+    }
+
+    #dict-input:focus { border-color: rgba(124,109,250,0.5); }
+    #dict-input::placeholder { color: var(--text2); }
+
+    #dict-search-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #fff;
+      font-size: 18px;
+    }
+
+    #dict-frame-wrap {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #dict-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #fff;
+    }
+
+    #dict-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--text2);
+      font-size: 14px;
+      text-align: center;
+      padding: 24px;
+    }
+
+    #dict-placeholder .dict-icon { font-size: 48px; opacity: 0.4; }
+
+    #dict-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: var(--text2);
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+    }
+
     #settings-btn {
       background: none;
       border: none;
@@ -402,15 +525,12 @@
       <div id="header-sub"><span id="online-dot"></span><span id="lang-display">Espagnol • en ligne</span></div>
     </div>
     <select class="lang-btn" id="lang-select">
-      <option value="Spanish">🇪🇸 Espagnol</option>
       <option value="English">🇬🇧 Anglais</option>
       <option value="German">🇩🇪 Allemand</option>
+      <option value="Spanish">🇪🇸 Espagnol</option>
       <option value="Italian">🇮🇹 Italien</option>
-      <option value="Portuguese">🇵🇹 Portugais</option>
-      <option value="Japanese">🇯🇵 Japonais</option>
-      <option value="Mandarin Chinese">🇨🇳 Mandarin</option>
-      <option value="Arabic">🇸🇦 Arabe</option>
     </select>
+    <button id="dict-btn" title="Dictionnaire" aria-label="Dictionnaire">📖</button>
     <button id="settings-btn" title="Paramètres" aria-label="Paramètres">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
     </button>
@@ -426,6 +546,26 @@
   </div>
 </div>
 
+<!-- Dictionnaire -->
+<div id="dict-overlay">
+  <div id="dict-header">
+    <span id="dict-title">📖 Dictionnaire</span>
+    <span id="dict-lang-label" style="font-size:13px;color:var(--text2);"></span>
+    <button id="dict-close">✕</button>
+  </div>
+  <div id="dict-search-bar">
+    <input id="dict-input" type="text" placeholder="Chercher un mot..." autocomplete="off" autocorrect="off" />
+    <button id="dict-search-btn">🔍</button>
+  </div>
+  <div id="dict-frame-wrap">
+    <div id="dict-placeholder">
+      <span class="dict-icon">📖</span>
+      <span>Saisis un mot ci-dessus<br/>pour le chercher sur WordReference</span>
+    </div>
+    <iframe id="dict-iframe" style="display:none;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+  </div>
+</div>
+
 <!-- Config modal -->
 <div id="config-overlay" class="hidden">
   <div id="config-sheet">
@@ -434,14 +574,19 @@
     <input class="config-input" type="password" id="api-key-input" placeholder="AIza..." autocomplete="off" />
     <div class="config-label">Langue cible</div>
     <select class="config-input" id="lang-select-modal">
-      <option value="Spanish">🇪🇸 Espagnol</option>
       <option value="English">🇬🇧 Anglais</option>
       <option value="German">🇩🇪 Allemand</option>
+      <option value="Spanish">🇪🇸 Espagnol</option>
       <option value="Italian">🇮🇹 Italien</option>
-      <option value="Portuguese">🇵🇹 Portugais</option>
-      <option value="Japanese">🇯🇵 Japonais</option>
-      <option value="Mandarin Chinese">🇨🇳 Mandarin</option>
-      <option value="Arabic">🇸🇦 Arabe</option>
+    </select>
+    <div class="config-label">Mon niveau (CECRL)</div>
+    <select class="config-input" id="level-select-modal">
+      <option value="A1">A1 — Débutant complet</option>
+      <option value="A2">A2 — Élémentaire</option>
+      <option value="B1">B1 — Intermédiaire</option>
+      <option value="B2" selected>B2 — Intermédiaire avancé</option>
+      <option value="C1">C1 — Avancé</option>
+      <option value="C2">C2 — Maîtrise</option>
     </select>
     <button id="save-btn">Enregistrer</button>
     <p class="config-note">
@@ -453,18 +598,32 @@
 
 <script>
   // ── State ──
+
+  const WR_LANG = {
+    "English": "enfr",
+    "German":  "frd",
+    "Spanish": "fres",
+    "Italian": "frit"
+  };
+
   const LANG_NAMES = {
-    "Spanish":"Espagnol","English":"Anglais","German":"Allemand",
-    "Italian":"Italien","Portuguese":"Portugais","Japanese":"Japonais",
-    "Mandarin Chinese":"Mandarin","Arabic":"Arabe"
+    "English":"Anglais","German":"Allemand","Spanish":"Espagnol","Italian":"Italien"
   };
   const LANG_FLAGS = {
-    "Spanish":"🇪🇸","English":"🇬🇧","German":"🇩🇪","Italian":"🇮🇹",
-    "Portuguese":"🇵🇹","Japanese":"🇯🇵","Mandarin Chinese":"🇨🇳","Arabic":"🇸🇦"
+    "English":"🇬🇧","German":"🇩🇪","Spanish":"🇪🇸","Italian":"🇮🇹"
+  };
+  const LEVEL_DESC = {
+    "A1":"vocabulaire très simple, phrases courtes, sujets du quotidien basiques (se présenter, compter, couleurs)",
+    "A2":"phrases simples, sujets familiers (famille, courses, directions), vocabulaire courant limité",
+    "B1":"phrases claires sur des sujets familiers, peut exprimer expériences et opinions simplement",
+    "B2":"sujets complexes, nuances, expressions idiomatiques courantes, conversation fluide",
+    "C1":"langue fluide et spontanée, vocabulaire riche, sujets complexes et abstraits",
+    "C2":"maîtrise quasi-native, toutes nuances, expressions idiomatiques avancées, registres variés"
   };
 
   let apiKey = localStorage.getItem("gemini_key") || "";
-  let lang = localStorage.getItem("lingua_lang") || "Spanish";
+  let lang = localStorage.getItem("lingua_lang") || "English";
+  let level = localStorage.getItem("lingua_level") || "B1";
   let history = [];
   let busy = false;
 
@@ -510,7 +669,7 @@
   }
 
   function startConversation() {
-    addBotBubble("👋 Salut ! Je suis ton correspondant. Écris-moi en " + (LANG_NAMES[lang] || lang) + " et je te corrigerai si tu fais des fautes, avant de te répondre !");
+    addBotBubble("👋 Salut ! Je suis ton correspondant. Écris-moi en " + (LANG_NAMES[lang] || lang) + " (niveau " + level + ") et je te corrigerai si tu fais des fautes, avant de te répondre !");
   }
 
   // ── Bubbles ──
@@ -570,14 +729,15 @@
 
     const typing = addTyping();
 
-    const systemPrompt = `Tu es un correspondant sympathique qui aide l'utilisateur à apprendre le ${LANG_NAMES[lang] || lang}.
+    const systemPrompt = `Tu es un correspondant sympathique qui aide l'utilisateur à apprendre le ${LANG_NAMES[lang] || lang}. Son niveau CECRL est ${level}. À ce niveau, l'apprenant maîtrise : ${LEVEL_DESC[level]}.
+Adapte ton vocabulaire, la complexité de tes phrases et les sujets abordés à ce niveau. Pour un A1/A2, utilise un langage très simple et des phrases courtes. Pour un B1/B2, sois naturel mais évite les expressions trop rares. Pour un C1/C2, parle librement avec richesse.
 Ton rôle :
 1. Vérifie si le message de l'utilisateur contient des fautes de grammaire, vocabulaire ou orthographe en ${lang}.
-   - S'il y a des fautes : réponds UNIQUEMENT avec un objet JSON : {"correction": "Explication de la faute et version corrigée (en français)", "reply": "Ta réponse naturelle en ${lang}"}
-   - S'il n'y a pas de fautes : réponds UNIQUEMENT avec un objet JSON : {"correction": null, "reply": "Ta réponse naturelle en ${lang}"}
+   - S'il y a des fautes : réponds UNIQUEMENT avec un objet JSON : {"correction": "Explication de la faute et version corrigée (en français)", "reply": "Ta réponse naturelle en ${lang} adaptée au niveau ${level}"}
+   - S'il n'y a pas de fautes : réponds UNIQUEMENT avec un objet JSON : {"correction": null, "reply": "Ta réponse naturelle en ${lang} adaptée au niveau ${level}"}
 2. Garde la conversation naturelle, comme un vrai correspondant.
 3. Réponds toujours en ${lang} dans le champ "reply".
-4. Les corrections doivent être bienveillantes, courtes et pédagogiques, en français.
+4. Les corrections doivent être bienveillantes, courtes et pédagogiques, en français. Adapte aussi les explications au niveau de l'utilisateur.
 Réponds UNIQUEMENT avec l'objet JSON, sans markdown, sans texte supplémentaire.`;
 
     // Build Gemini contents array
@@ -589,9 +749,19 @@ Réponds UNIQUEMENT avec l'objet JSON, sans markdown, sans texte supplémentaire
     // Add current message
     contents.push({ role: "user", parts: [{ text }] });
 
+    if (!window._geminiModel) {
+      try {
+        const modelsRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+        const modelsData = await modelsRes.json();
+        const available = (modelsData.models || []).map(m => m.name.replace("models/","")).filter(m => m.startsWith("gemini") && !m.includes("embedding") && !m.includes("aqa"));
+        const preferred = ["gemini-2.5-flash-lite","gemini-2.5-flash","gemini-2.0-flash-lite","gemini-1.5-flash-001","gemini-1.5-flash"];
+        window._geminiModel = preferred.find(p => available.some(a => a.startsWith(p))) || available[0] || "gemini-2.0-flash";
+      } catch(e) { window._geminiModel = "gemini-2.0-flash"; }
+    }
+
     try {
       const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/${window._geminiModel}:generateContent?key=${apiKey}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -660,6 +830,7 @@ Réponds UNIQUEMENT avec l'objet JSON, sans markdown, sans texte supplémentaire
   function openConfig() {
     apiKeyInput.value = apiKey;
     langModal.value = lang;
+    document.getElementById("level-select-modal").value = level;
     overlay.classList.remove("hidden");
     setTimeout(() => apiKeyInput.focus(), 350);
   }
@@ -675,11 +846,14 @@ Réponds UNIQUEMENT avec l'objet JSON, sans markdown, sans texte supplémentaire
     const newLang = langModal.value;
     if (!newKey) { apiKeyInput.style.borderColor = "var(--correction-border)"; return; }
 
-    const langChanged = newLang !== lang;
+    const newLevel = document.getElementById("level-select-modal").value;
+    const langChanged = newLang !== lang || newLevel !== level;
     apiKey = newKey;
     lang = newLang;
+    level = newLevel;
     localStorage.setItem("gemini_key", apiKey);
     localStorage.setItem("lingua_lang", lang);
+    localStorage.setItem("lingua_level", level);
     langSelect.value = lang;
     updateLangDisplay();
     overlay.classList.add("hidden");
@@ -687,6 +861,44 @@ Réponds UNIQUEMENT avec l'objet JSON, sans markdown, sans texte supplémentaire
 
     if (langChanged || history.length === 0) resetConversation();
   });
+
+  // ── Dictionnaire ──
+  const dictOverlay  = document.getElementById("dict-overlay");
+  const dictInput    = document.getElementById("dict-input");
+  const dictBtn      = document.getElementById("dict-btn");
+  const dictClose    = document.getElementById("dict-close");
+  const dictSearchBtn= document.getElementById("dict-search-btn");
+  const dictIframe   = document.getElementById("dict-iframe");
+  const dictPlaceholder = document.getElementById("dict-placeholder");
+  const dictLangLabel= document.getElementById("dict-lang-label");
+
+  function openDict() {
+    dictLangLabel.textContent = "FR ↔ " + (LANG_NAMES[lang] || lang);
+    dictOverlay.classList.add("open");
+    setTimeout(() => dictInput.focus(), 350);
+  }
+
+  function closeDict() {
+    dictOverlay.classList.remove("open");
+  }
+
+  function searchWord() {
+    const word = dictInput.value.trim();
+    if (!word) return;
+    const code = WR_LANG[lang] || "enfr";
+    const url = `https://www.wordreference.com/${code}/${encodeURIComponent(word)}`;
+    dictIframe.src = url;
+    dictIframe.style.display = "block";
+    dictPlaceholder.style.display = "none";
+  }
+
+  dictBtn.addEventListener("click", openDict);
+  dictClose.addEventListener("click", closeDict);
+  dictSearchBtn.addEventListener("click", searchWord);
+  dictInput.addEventListener("keydown", e => {
+    if (e.key === "Enter") searchWord();
+  });
+
 </script>
 </body>
 </html>
