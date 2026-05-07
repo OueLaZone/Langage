@@ -560,9 +560,8 @@
   <div id="dict-frame-wrap">
     <div id="dict-placeholder">
       <span class="dict-icon">📖</span>
-      <span>Saisis un mot ci-dessus<br/>pour le chercher sur WordReference</span>
+      <span>Saisis un mot et appuie sur 🔍<br/>WordReference s'ouvrira dans Safari</span>
     </div>
-    <iframe id="dict-iframe" style="display:none;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
   </div>
 </div>
 
@@ -887,9 +886,7 @@ Réponds UNIQUEMENT avec l'objet JSON, sans markdown, sans texte supplémentaire
     if (!word) return;
     const code = WR_LANG[lang] || "enfr";
     const url = `https://www.wordreference.com/${code}/${encodeURIComponent(word)}`;
-    dictIframe.src = url;
-    dictIframe.style.display = "block";
-    dictPlaceholder.style.display = "none";
+    window.open(url, "_blank");
   }
 
   dictBtn.addEventListener("click", openDict);
